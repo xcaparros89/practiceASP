@@ -1,0 +1,95 @@
+﻿
+@model IEnumerable<Rocky.Models.Category>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Category List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> &nbsp; Create New Category
+            </a>
+        </div>
+    </div>
+    <br /><br />
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Category Name
+                    </th>
+                    <th>
+                        Display Order
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="50%">@obj.Name</td>
+                        <td width="30%">@obj.DisplayOrder</td>
+                        <td class="text-center">
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Category" asp-action="Edit" asp-route-Id="@obj.Id" class="btn btn-primary mx-2">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-controller="Category" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger mx-2">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        Bar Chart
+                    </div>
+                    <div class="card-body">
+                        <canvas class="my-4 h-25" id="bar"></canvas>
+                    </div>
+                </div>
+            </div>
+            }
+            else
+            {
+            <p>No category exist.</p>
+            }
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
+        <script type="text/javascript">
+
+    var barchart = document.getElementById('bar').getContext('2d');
+    var mybarchart = new Chart(barchart, {
+        type: 'bar',
+        data: {
+            labels: @Model,
+            datasets: [{
+                label: 'Bar Chart',
+                data: [100, 200, 300],
+                backgroundColor: 'rbga(6, 128, 249)'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+
+        </script>

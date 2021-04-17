@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcoome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div class="row">
+<div class="col-sm-6">
+    <div class="card">
+        <div class="card-header">
+            Bar Chart
+        </div>
+        <div class="card-body">
+            <canvas class="my-4 h-25" id="bar"></canvas>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="card">
+        <div class="card-header">
+            Pie Chart
+        </div>
+        <div class="card-body">
+            <canvas class="my-4 h-25" id="pie"></canvas>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
+<script type="text/javascript">
+
+    var barchart = document.getElementById('bar').getContext('2d');
+    var mybarchart = new Chart(barchart, {
+        type: 'bar',
+        data: {
+            labels: ['1', '2', '3'],
+            datasets: [{
+                label: 'Bar Chart',
+                data: [100, 200, 300],
+                backgroundColor: 'rbga(6, 128, 249)'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+
+    var piechart = document.getElementById('pie').getContext('2d');
+    var mypiechart = new Chart(piechart, {
+        type: 'pie',
+        data: {
+            labels: ['1', '2', '3'],
+            datasets: [{
+                label: 'Bar Chart',
+                data: [100, 200, 300],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)'
+                ]
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+
+</script>
